@@ -18,17 +18,37 @@
       </thead>
 
       <tbody>
-        <% categories.map(category => { %>
+        <% categories.forEach(category => { %>
           <tr>
             <th> <%= category.id %></th>
             <th> <%= category.title %></th>
             <th> <%= category.slug %></th>
             <th id="actions">
-              <button class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i></button>
-              <form action="/admin/categories/delete" method="post" class="mx-2">
-                <input type="hidden" name="id" value="<%= category.id %>">
-                <button class="btn btn-danger"><i class="fa-solid fa-trash"></i></button>
-              </form>
+              <button class="btn btn-primary mx-2"><i class="fa-solid fa-pen-to-square"></i></button>
+              <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-trash"></i></button>
+              <!-- Modal --> 
+              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Deletar <%= category.title %></h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <h3>Tem que certeza que deseja apagar essa categoria?</h3>
+                      <p><%= category.title %></p>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+
+                      <form action="/admin/categories/delete" method="post">
+                        <input type="hidden" name="id" value="<%= category.id %>">
+                        <button class="btn btn-danger">Deletar</button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </th>
           </tr>
         <% }) %>
