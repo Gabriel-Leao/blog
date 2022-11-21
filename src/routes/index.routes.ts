@@ -1,4 +1,5 @@
 import { Router } from 'express'
+import adminRoutes from './admin.routes'
 import articlesRouters from './articles.routes'
 import categoriesRouters from './categories.routes'
 
@@ -10,5 +11,6 @@ routes.get('/', (req, res) => {
 
 routes.use('/categories', categoriesRouters)
 routes.use('/articles', articlesRouters)
+routes.use('/admin', adminRoutes)
 
 export default routes

@@ -1,5 +1,6 @@
 import { STRING, TEXT } from 'sequelize'
 import database from '../config/db.config'
+import Category from './Category'
 
 const Article = database.define('articles', {
   title: {
@@ -15,5 +16,8 @@ const Article = database.define('articles', {
     allowNull: false,
   },
 })
+
+Category.hasMany(Article)
+Article.belongsTo(Category)
 
 export default Article
