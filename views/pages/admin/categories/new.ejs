@@ -1,5 +1,4 @@
 <%- include('../../../partials/header/index') %>
-<body>
   <%- include('../../../partials/navbar/index') %>
 
   <div class="container">
@@ -9,7 +8,7 @@
       </div>
 
       <div class="card-body">
-        <form action="" method="post">
+        <form action="/admin/categories/create" method="post">
           <label for="title">Categoria:</label>
           <input class="form-control" type="text" name="title" id="title" placeholder="Título da categoria">
           <button class="btn btn-success my-4">Cadastrar</button>
@@ -17,5 +16,4 @@
       </div>
     </div>
   </div>
-</body>
 <%- include('../../../partials/footer/index') %>

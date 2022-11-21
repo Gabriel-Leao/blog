@@ -1,0 +1,40 @@
+<%- include('../../../partials/header/index') %>
+  <%- include('../../../partials/navbar/index') %>
+  <div class="container">
+    <div id="category-title">
+      <h2>Categorias</h2>
+      <a class="btn btn-success" href="/admin/categories/new">Criar categoria</a>
+    </div>
+    <hr>
+
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Título</th>
+          <th>Slug</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% categories.map(category => { %>
+          <tr>
+            <th> <%= category.id %></th>
+            <th> <%= category.title %></th>
+            <th> <%= category.slug %></th>
+            <th id="actions">
+              <button class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i></button>
+              <form action="/admin/categories/delete" method="post" class="mx-2">
+                <input type="hidden" name="id" value="<%= category.id %>">
+                <button class="btn btn-danger"><i class="fa-solid fa-trash"></i></button>
+              </form>
+            </th>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+
+  <script src="https://kit.fontawesome.com/dfc6253c2b.js" crossorigin="anonymous"></script>
+<%- include('../../../partials/footer/index') %>
