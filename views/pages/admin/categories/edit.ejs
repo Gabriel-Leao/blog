@@ -1,0 +1,20 @@
+<%- include('../../../partials/header/index') %>
+  <%- include('../../../partials/navbar/index') %>
+
+  <div class="container">
+    <div class="card">
+      <div class="card-header">
+        <h2>Edição de categoria</h2>
+      </div>
+
+      <div class="card-body">
+        <form action="/admin/categories/update" method="post">
+          <label for="title">Categoria:</label>
+          <input class="form-control" type="text" name="title" id="title" value="<%= category.title %>" placeholder="Título da categoria">
+          <input type="hidden" name="id" value="<%= category.id %>">
+          <button class="btn btn-success my-4">Atualizar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+<%- include('../../../partials/footer/index') %>
