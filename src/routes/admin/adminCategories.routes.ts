@@ -1,14 +1,14 @@
 import { Router } from 'express'
 import slugify from 'slugify'
-import Category from '../models/Category'
+import Category from '../../models/Category'
 
-const adminRoutes = Router()
+const categoriesRoutes = Router()
 
-adminRoutes.get('/categories/new', (req, res) => {
+categoriesRoutes.get('/new', (req, res) => {
   res.render('pages/admin/categories/new')
 })
 
-adminRoutes.post('/categories/create', (req, res) => {
+categoriesRoutes.post('/create', (req, res) => {
   const title = req.body.title
 
   if (title == undefined || title == '') {
@@ -21,13 +21,13 @@ adminRoutes.post('/categories/create', (req, res) => {
   }
 })
 
-adminRoutes.get('/categories', (req, res) => {
+categoriesRoutes.get('/', (req, res) => {
   Category.findAll().then((categories) => {
     res.render('pages/admin/categories/index', { categories })
   })
 })
 
-adminRoutes.post('/categories/delete', (req, res) => {
+categoriesRoutes.post('/delete', (req, res) => {
   const id = req.body.id
 
   if (id != undefined) {
@@ -41,7 +41,7 @@ adminRoutes.post('/categories/delete', (req, res) => {
   } else res.redirect('/admin/categories')
 })
 
-adminRoutes.get('/categories/edit/:id', (req, res) => {
+categoriesRoutes.get('/edit/:id', (req, res) => {
   const id = req.params.id
 
   if (isNaN(+id)) {
@@ -59,7 +59,7 @@ adminRoutes.get('/categories/edit/:id', (req, res) => {
   }
 })
 
-adminRoutes.post('/categories/update', (req, res) => {
+categoriesRoutes.post('/update', (req, res) => {
   const id = req.body.id
   const title = req.body.title
   const slug = slugify(title)
@@ -73,4 +73,4 @@ adminRoutes.post('/categories/update', (req, res) => {
   }
 })
 
-export default adminRoutes
+export default categoriesRoutes

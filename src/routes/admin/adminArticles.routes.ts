@@ -2,8 +2,8 @@ import { Router } from 'express'
 
 const articlesRoutes = Router()
 
-articlesRoutes.get('/', (req, res) => {
-  res.send('ROTA DE ARTIGOS')
+articlesRoutes.get('/new', (req, res) => {
+  res.render('pages/admin/articles/new')
 })
 
 export default articlesRoutes

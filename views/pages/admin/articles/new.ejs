@@ -4,13 +4,15 @@
   <div class="container">
     <div class="card">
       <div class="card-header">
-        <h2>Cadastro de categoria</h2>
+        <h2>Novo artigo</h2>
       </div>
 
       <div class="card-body">
         <form action="/admin/categories/create" method="post">
-          <label for="title">Título da categoria:</label>
-          <input class="form-control mt-1" type="text" name="title" id="title" placeholder="Título da categoria">
+          <label for="title">Título do artigo:</label>
+          <input class="form-control mt-1 mb-2" type="text" name="title" id="title" placeholder="Título do artigo">
+          <label for="articleBody">Texto:</label>
+          <textarea class="form-control mt-1" name="articleBody" placeholder="Escreva o artigo aqui" id="articleBody" cols="30" rows="10"></textarea>
           <button class="btn btn-success my-4">Cadastrar</button>
         </form>
       </div>

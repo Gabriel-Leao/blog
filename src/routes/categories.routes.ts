@@ -1,9 +1,9 @@
 import { Router } from 'express'
 
-const categoriesRouters = Router()
+const categoriesRoutes = Router()
 
-categoriesRouters.get('/', (req, res) => {
+categoriesRoutes.get('/', (req, res) => {
   res.send('ROTA DE CATEGORIAS')
 })
 
-export default categoriesRouters
+export default categoriesRoutes
