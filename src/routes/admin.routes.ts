@@ -64,14 +64,13 @@ adminRoutes.post('/categories/update', (req, res) => {
   const title = req.body.title
   const slug = slugify(title)
 
-  Category.update(
-    { title, slug },
-    {
-      where: {
-        id,
-      },
-    }
-  ).then(() => res.redirect('/admin/categories'))
+  if (title == '' || title == undefined) {
+    res.redirect(`/admin/categories/edit/${id}`)
+  } else {
+    Category.update({ title, slug }, { where: { id } }).then(() =>
+      res.redirect('/admin/categories')
+    )
+  }
 })
 
 export default adminRoutes

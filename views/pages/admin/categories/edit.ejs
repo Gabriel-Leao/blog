@@ -10,7 +10,7 @@
       <div class="card-body">
         <form action="/admin/categories/update" method="post">
           <label for="title">Categoria:</label>
-          <input class="form-control" type="text" name="title" id="title" value="<%= category.title %>" placeholder="Título da categoria">
+          <input class="form-control mt-1" type="text" name="title" id="title" value="<%= category.title %>" placeholder="Título da categoria">
           <input type="hidden" name="id" value="<%= category.id %>">
           <button class="btn btn-success my-4">Atualizar</button>
         </form>
