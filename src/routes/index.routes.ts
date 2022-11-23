@@ -7,7 +7,7 @@ import categoriesRoutes from './categories.routes'
 const routes = Router()
 
 routes.get('/', (req, res) => {
-  Article.findAll().then((articles) => {
+  Article.findAll({ order: [['id', 'desc']] }).then((articles) => {
     res.render('pages/home', { articles })
   })
 })
