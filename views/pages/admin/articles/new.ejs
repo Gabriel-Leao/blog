@@ -8,11 +8,17 @@
       </div>
 
       <div class="card-body">
-        <form action="/admin/categories/create" method="post">
+        <form action="/admin/articles/create" method="post">
           <label for="title">Título do artigo:</label>
           <input class="form-control mt-1 mb-2" type="text" name="title" id="title" placeholder="Título do artigo">
           <label for="articleBody">Texto:</label>
           <textarea class="form-control mt-1" name="articleBody" placeholder="Escreva o artigo aqui" id="articleBody" cols="30" rows="10"></textarea>
+          <label for="category" class="mt-2">Categoria:</label>
+          <select name="category" id="category" class="form-control mt-1">
+            <% categories.map((category) => { %>
+              <option value="<%=category.id %>"><%= category.title %></option>
+            <% }) %>
+          </select>
           <button class="btn btn-success my-4">Cadastrar</button>
         </form>
       </div>
