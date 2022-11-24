@@ -53,4 +53,46 @@ articlesRoutes.post('/delete', (req, res) => {
   } else res.redirect('/admin/articles')
 })
 
+articlesRoutes.get('/edit/:id', (req, res) => {
+  const id = req.params.id
+
+  if (isNaN(+id)) {
+    res.redirect('/admin/articles')
+  } else {
+    Article.findByPk(id)
+      .then((article) => {
+        if (article != undefined) {
+          Category.findAll()
+            .then((categories) => {
+              res.render('pages/admin/articles/edit', { article, categories })
+            })
+            .catch((error) => {
+              res.redirect('/admin/articles')
+            })
+        } else res.redirect('/admin/articles')
+      })
+      .catch((error) => {
+        res.redirect('/admin/articles')
+      })
+  }
+})
+
+articlesRoutes.post('/update', (req, res) => {
+  const id = req.body.id
+  const title = req.body.title
+  const body = req.body.articleBody
+  const slug = slugify(title)
+  const categoryId = req.body.category
+
+  if (title == undefined || title == '' || body == undefined || body == '') {
+    res.redirect(`/admin/articles/edit/${id}`)
+  } else if (isNaN(id)) {
+    res.redirect('/admin/articles')
+  } else {
+    Article.update({ title, slug, body, categoryId }, { where: { id } }).then(
+      () => res.redirect('/admin/articles')
+    )
+  }
+})
+
 export default articlesRoutes

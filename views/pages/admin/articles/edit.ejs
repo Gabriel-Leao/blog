@@ -1,0 +1,41 @@
+<%- include('../../../partials/header') %>
+  <%- include('../../../partials/navbar') %>
+
+  <div class="container">
+    <div class="card">
+      <div class="card-header">
+        <h2>Edição de artigo</h2>
+      </div>
+
+      <div class="card-body">
+        <form action="/admin/articles/update" method="post">
+          <label for="title">Título do artigo:</label>
+          <input class="form-control mt-1 mb-2" type="text" name="title" id="title" placeholder="Título do artigo" value="<%= article.title %>">
+          <label for="articleBody">Texto:</label>
+          <textarea class="form-control mt-1" name="articleBody" placeholder="Escreva o artigo aqui" id="articleBody" cols="30" rows="10"> <%- article.body%></textarea>
+          <input type="hidden" name="id" value="<%= article.id %>">
+          <label for="category" class="mt-2">Categoria:</label>
+          <select name="category" id="category" class="form-control mt-1">
+            <% categories.map((category) => { %>
+              <% if (category.id == article.categoryId) { %>
+                <option value="<%=category.id %>" selected ><%= category.title %></option>
+                <% } else { %>
+                  <option value="<%=category.id %>"><%= category.title %></option>
+              <% } %>
+            <% }) %>
+          </select>
+          <button class="btn btn-success my-4">Atualizar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+<%- include('../../../partials/footer') %>
+
+<script src="/tinymce/tinymce.min.js"></script>
+<script>
+  tinymce.init({
+    language: 'pt_BR',
+    selector: "#articleBody",
+    plugins: 'advlist autolink link image lists preview searchreplace wordcount fullscreen insertdatetime media save table emoticons autosave',
+  })
+</script>
