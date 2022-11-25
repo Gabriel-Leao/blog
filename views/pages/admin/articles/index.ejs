@@ -26,10 +26,10 @@
             <td> <%= article.slug %></td>
             <td> <%= article.category.title %></td>
             <td id="actions">
-              <a href="/admin/articles/edit/<%= article.id %>" class="btn btn-primary mx-2"><i class="fa-solid fa-pen-to-square"></i></a>
+              <a title="editar" href="/admin/articles/edit/<%= article.id %>" class="btn btn-primary mx-2"><i class="fa-solid fa-pen-to-square"></i></a>
               <form action="/admin/articles/delete" method="post" onsubmit="confirmDeletion(this)">
                 <input type="hidden" name="id" value="<%= article.id %>">
-                <button class="btn btn-danger"><i class="fa-solid fa-trash"></i></button>
+                <button title="deletar" class="btn btn-danger"><i class="fa-solid fa-trash"></i></button>
               </form>
             </td>
           </tr>

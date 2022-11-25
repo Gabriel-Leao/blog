@@ -24,10 +24,10 @@
             <td> <%= category.title %></td>
             <td> <%= category.slug %></td>
             <td id="actions">
-              <a href="/admin/categories/edit/<%= category.id %>" class="btn btn-primary mx-2"><i class="fa-solid fa-pen-to-square"></i></a>
+              <a title="editar" href="/admin/categories/edit/<%= category.id %>" class="btn btn-primary mx-2"><i class="fa-solid fa-pen-to-square"></i></a>
               <form action="/admin/categories/delete" method="post" onsubmit="confirmDeletion(this)">
                 <input type="hidden" name="id" value="<%= category.id %>">
-                <button class="btn btn-danger"><i class="fa-solid fa-trash"></i></button>
+                <button title="deletar" class="btn btn-danger"><i class="fa-solid fa-trash"></i></button>
               </form>
             </td>
           </tr>
