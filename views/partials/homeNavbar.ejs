@@ -6,7 +6,7 @@
   <ul class="navbar-nav me-auto">
     <% categories.map(category => { %>
       <li>
-        <a class="nav-link" href="/"><%= category.title %></a>
+        <a class="nav-link" href="/categories/<%= category.slug %>"><%= category.title %></a>
       </li>
     <% }) %>
   </ul>
