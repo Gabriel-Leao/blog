@@ -4,8 +4,10 @@
   </a>
 
   <ul class="navbar-nav me-auto">
-    <li>
-      <a class="nav-link" href="/">Home</a>
-    </li>
+    <% categories.map(category => { %>
+      <li>
+        <a class="nav-link" href="/"><%= category.title %></a>
+      </li>
+    <% }) %>
   </ul>
 </nav>

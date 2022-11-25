@@ -1,5 +1,6 @@
 import { Router } from 'express'
 import Article from '../models/Article'
+import Category from '../models/Category'
 
 const articlesRoutes = Router()
 
@@ -11,7 +12,9 @@ articlesRoutes.get('/:slug', (req, res) => {
       if (article == undefined) {
         res.redirect('/')
       } else {
-        res.render('pages/article', { article })
+        Category.findAll().then((categories) => {
+          res.render('pages/article', { article, categories })
+        })
       }
     })
     .catch((error) => res.redirect('/'))
