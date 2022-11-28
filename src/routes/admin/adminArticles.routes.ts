@@ -42,15 +42,21 @@ articlesRoutes.post('/create', (req, res) => {
 articlesRoutes.post('/delete', (req, res) => {
   const id = req.body.id
 
-  if (id != undefined) {
-    if (!isNaN(id)) {
+  if (id == undefined) {
+    res.redirect('/admin/articles')
+  } else if (isNaN(id)) {
+    res.redirect('/admin/articles')
+  } else {
+    try {
       Article.destroy({
         where: {
           id,
         },
       }).then(() => res.redirect('/admin/articles'))
-    } else res.redirect('/admin/articles')
-  } else res.redirect('/admin/articles')
+    } catch (error) {
+      res.redirect('/admin/articles')
+    }
+  }
 })
 
 articlesRoutes.get('/edit/:id', (req, res) => {

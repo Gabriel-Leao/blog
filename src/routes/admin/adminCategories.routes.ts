@@ -31,14 +31,20 @@ categoriesRoutes.post('/delete', (req, res) => {
   const id = req.body.id
 
   if (id != undefined) {
-    if (!isNaN(id)) {
+    res.redirect('/admin/categories')
+  } else if (isNaN(id)) {
+    res.redirect('/admin/categories')
+  } else {
+    try {
       Category.destroy({
         where: {
           id,
         },
       }).then(() => res.redirect('/admin/categories'))
-    } else res.redirect('/admin/categories')
-  } else res.redirect('/admin/categories')
+    } catch (error) {
+      res.redirect('/admin/categories')
+    }
+  }
 })
 
 categoriesRoutes.get('/edit/:id', (req, res) => {
