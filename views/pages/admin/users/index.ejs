@@ -1,4 +1,47 @@
 <%- include('../../../partials/header') %>
   <%- include('../../../partials/navbar') %>
-  <h1>Users page</h1>
+  <div class="container">
+    <div id="category-title">
+      <h2>Usuários</h2>
+      <a class="btn btn-success" href="/admin/users/new">Criar usuário</a>
+    </div>
+    <hr>
+
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>E-mail</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% users.map(user => { %>
+          <tr>
+            <td> <%= user.id %></td>
+            <td> <%= user.email %></td>
+            <td id="actions">
+              <a title="editar" href="/admin/users/edit/<%= user.id %>" class="btn btn-primary mx-2"><i class="fa-solid fa-pen-to-square"></i></a>
+              <form action="/admin/users/delete" method="post" onsubmit="confirmDeletion(this)">
+                <input type="hidden" name="id" value="<%= user.id %>">
+                <button title="deletar" class="btn btn-danger"><i class="fa-solid fa-trash"></i></button>
+              </form>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+
+  <script src="https://kit.fontawesome.com/dfc6253c2b.js" crossorigin="anonymous"></script>
+  <script>
+    const confirmDeletion = (form) => {
+      event.preventDefault()
+      const decision = confirm("Você deseja deletar está categoria?")
+      if (decision) {
+        form.submit()
+      } else {}
+    }
+  </script>
 <%- include('../../../partials/footer') %>
