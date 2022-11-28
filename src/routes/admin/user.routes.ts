@@ -113,7 +113,19 @@ userRoutes.post('/update', (req, res) => {
 })
 
 userRoutes.post('/delete', (req, res) => {
-  res.render('pages/admin/users/new')
+  const id = req.body.id
+
+  if (id == undefined) {
+    res.redirect('/admin/users')
+  } else if (isNaN(+id)) {
+    res.redirect('/admin/users')
+  } else {
+    try {
+      User.destroy({ where: { id } }).then(() => res.redirect('/admin/users'))
+    } catch (error) {
+      res.redirect('/admin/users')
+    }
+  }
 })
 
 export default userRoutes
