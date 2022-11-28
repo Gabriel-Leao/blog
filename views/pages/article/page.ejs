@@ -1,12 +1,6 @@
 <%- include('../../partials/header') %>
   <%- include('../../partials/homeNavbar') %>
   <div class="container">
-    <div class="container-fluid bg-primary text-light p-5">
-      <h1 class="display-4">Bem-vindo!</h1>
-      <hr>
-      <p>Este é um blog sobre programação e tudo que cerca esse mundo incrível.</p>
-    </div>
-
     <% result.articles.rows.map(article => { %>
       <div class="card my-4">
         <div class="card-header">

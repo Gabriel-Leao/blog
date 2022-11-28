@@ -13,3 +13,8 @@
 #actions {
   display: flex;
 }
+
+#pagination {
+  display: flex;
+  justify-content: center;
+}
