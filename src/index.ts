@@ -2,9 +2,22 @@ import bodyParser from 'body-parser'
 import express from 'express'
 import routes from './routes/index.routes'
 import database from './config/db.config'
+import session from 'express-session'
 
 const port = process.env.PORT || 3333
 const app = express()
+
+type User = {
+  id: number
+  email: string
+}
+
+// Augment express-session with a custom SessionData object
+declare module 'express-session' {
+  interface SessionData {
+    user: User
+  }
+}
 
 try {
   database
@@ -13,6 +26,13 @@ try {
 } catch (error) {
   console.error('Unable to connect to the database:', error)
 }
+
+app.use(
+  session({
+    secret: 'gvdbdubsjabuieucakhdi',
+    cookie: {},
+  })
+)
 
 app.set('view engine', 'ejs')
 
