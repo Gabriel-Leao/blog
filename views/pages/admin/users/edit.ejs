@@ -14,7 +14,31 @@
           <input type="hidden" name="id" value="<%= user.id %>">
 
           <div class="d-grid">
-            <button type="submit" class="btn btn-success mt-4 btn-lg">Atualizar</button>
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-success mt-4 btn-lg" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              Atualizar
+            </button>
+          </div>
+
+          <!-- Modal -->
+          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="exampleModalLabel">Confirmar atualização</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <p>Digite a sua senha para confirmar as mudanças</p>
+                  <label for="confirmPassword">Senha:</label>
+                  <input class="form-control" type="password" name="confirmPassword" id="confirmPassword">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                  <button type="submit" class="btn btn-success">Confirmar</button>
+                </div>
+              </div>
+            </div>
           </div>
         </form>
       </div>

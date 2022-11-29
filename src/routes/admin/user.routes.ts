@@ -62,51 +62,66 @@ userRoutes.post('/update', (req, res) => {
   const id = req.body.id
   const password = req.body.userPassword
   const email = req.body.userEmail
+  const confirmPassword = req.body.confirmPassword
 
-  if (email == '') {
+  if (confirmPassword == '') {
     res.redirect(`/admin/users/edit/${id}`)
   } else {
     User.findByPk(id).then((user: any) => {
-      if (user.email == email) {
-        if (password == '') {
+      const correct = bcrypt.compareSync(confirmPassword, user.password)
+      if (correct) {
+        if (email == '') {
           res.redirect(`/admin/users/edit/${id}`)
         } else {
-          try {
-            const salt = bcrypt.genSaltSync(10)
-            const hash = bcrypt.hashSync(password, salt)
-            User.update({ password: hash }, { where: { id } }).then(() => {
-              res.redirect('/admin/users')
-            })
-          } catch (error) {
-            res.redirect(`/admin/users/edit/${id}`)
-          }
-        }
-      } else {
-        User.findOne({ where: { email } }).then((user) => {
-          if (user == undefined) {
-            if (password == '') {
-              try {
-                User.update({ email }, { where: { id } }).then(() => {
-                  res.redirect('/admin/users')
-                })
-              } catch (error) {
+          User.findByPk(id).then((user: any) => {
+            if (user.email == email) {
+              if (password == '') {
                 res.redirect(`/admin/users/edit/${id}`)
+              } else {
+                try {
+                  const salt = bcrypt.genSaltSync(10)
+                  const hash = bcrypt.hashSync(password, salt)
+                  User.update({ password: hash }, { where: { id } }).then(
+                    () => {
+                      res.redirect('/admin/users')
+                    }
+                  )
+                } catch (error) {
+                  res.redirect(`/admin/users/edit/${id}`)
+                }
               }
             } else {
-              try {
-                const salt = bcrypt.genSaltSync(10)
-                const hash = bcrypt.hashSync(password, salt)
-                User.update({ email, password: hash }, { where: { id } }).then(
-                  () => {
-                    res.redirect('/admin/users')
+              User.findOne({ where: { email } }).then((user) => {
+                if (user == undefined) {
+                  if (password == '') {
+                    try {
+                      User.update({ email }, { where: { id } }).then(() => {
+                        res.redirect('/admin/users')
+                      })
+                    } catch (error) {
+                      res.redirect(`/admin/users/edit/${id}`)
+                    }
+                  } else {
+                    try {
+                      const salt = bcrypt.genSaltSync(10)
+                      const hash = bcrypt.hashSync(password, salt)
+                      User.update(
+                        { email, password: hash },
+                        { where: { id } }
+                      ).then(() => {
+                        res.redirect('/admin/users')
+                      })
+                    } catch (error) {
+                      res.redirect(`/admin/users/edit/${id}`)
+                    }
                   }
-                )
-              } catch (error) {
-                res.redirect(`/admin/users/edit/${id}`)
-              }
+                } else res.redirect(`/admin/users/edit/${id}`)
+              })
             }
-          } else res.redirect(`/admin/users/edit/${id}`)
-        })
+          })
+        }
+      } else {
+        res.redirect(`/admin/users/edit/${id}`)
       }
     })
   }
