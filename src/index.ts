@@ -29,8 +29,10 @@ try {
 
 app.use(
   session({
-    secret: 'gvdbdubsjabuieucakhdi',
+    secret: process.env.SECRET || '',
     cookie: {},
+    resave: true,
+    saveUninitialized: true,
   })
 )
 

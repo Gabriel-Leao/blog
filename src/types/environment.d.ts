@@ -8,6 +8,7 @@ declare global {
       DB_URI: string
       DB_NAME: string
       PORT: Number
+      SECRET: string
     }
   }
 }
