@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "tsx watch ./src/server.ts",
     "build": "tsup ./src",
-    "start": "node ./dist/src/index.js"
+    "start": "node ./dist/server.js"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
