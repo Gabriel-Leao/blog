@@ -1,7 +1,7 @@
 {
   "name": "blog",
   "version": "1.0.0",
-  "main": "app.js",
+  "main": "./dist/server.js",
   "license": "MIT",
   "scripts": {
     "dev": "tsx watch ./src/server.ts",
